@@ -1,14 +1,6 @@
 def solution(tickets):
     answer = []
     visited = [0] * len(tickets)
-    remove_name = []
-    for i in range(len(tickets)):
-        for j in range(i+1, len(tickets)):
-            if tickets[i][0] == tickets[j][0] and tickets[i][1] == tickets[j][1]:
-                remove_name.append(tickets[i])
-    while remove_name:
-        name = remove_name.pop()
-        tickets.remove(name)
     
     def all_visited():
         for i in range(len(tickets)):
@@ -27,9 +19,10 @@ def solution(tickets):
                     visited[i] = order
                     ans.append(tickets[i][1])
                     DFS(ans, i, order+1)
-                    ans.remove(tickets[i][1])
+                    ans.pop()
                     visited[i] = 0
 
+    tickets.sort(key=lambda x: (x[0], x[1]))
     for i in range(len(tickets)):
         if tickets[i][0] == "ICN":
             ans = tickets[i]
@@ -37,8 +30,7 @@ def solution(tickets):
             DFS(ans, i, 2)
             visited[i] = 0
 
-    return sorted(answer)
+    return answer[0]
+
 
 print(solution([["ICN", "SFO"], ["ICN", "ATL"], ["SFO", "ATL"], ["ATL", "ICN"], ["ATL", "SFO"]]))
-print(solution([ [ "ICN", "COO"], [ "COO", "ICN"], [ "COO", "ICN" ] ]))
-a = [[ "ICN", "COO"], [ "COO", "ICN"], [ "COO", "ICN" ] ]
