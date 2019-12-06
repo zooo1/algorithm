@@ -3,8 +3,8 @@ from itertools import combinations, permutations
 def solution(numbers):
     answer = set()
     def is_prime_number(num):
-        if num == 2:
-            return True
+        if num < 2:
+            return False
         for n in range(2, num):
             if num%n == 0:
                 return False
@@ -19,5 +19,3 @@ def solution(numbers):
 
     return len(answer)
 
-print(solution("17"))
-print(solution("011"))
