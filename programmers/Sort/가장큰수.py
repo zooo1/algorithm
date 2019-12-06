@@ -1,29 +1,13 @@
-def make_perm(k, N, order):
-    # if k >= N:
-    #     print(order)
-    if all_checked(order):
-        print(order) 
-
-    else:
-        for i in range(N):
-            if order[i] == -1:
-                order[i] = k
-                make_perm(k+1, N, order)
-
-
-def all_checked(order):
-    for i in range(len(order)):
-        if order[i] == -1:
-            return False
-    return True
-
-
+from itertools import permutations
 def solution(numbers):
-    N = len(numbers)
-    for i in range(N):
-        make_perm(0, N, [-1]*N)
-    answer = ''
+    answer = '0'
+    perms = permutations(numbers, len(numbers))
+    for perm in perms:
+        ans = ''
+        for p in perm:
+            ans += str(p)
+        if int(ans) > int(answer):
+            answer = ans
     return answer
 
-
-solution([6, 10, 2])
+print(solution([3, 30, 34, 5, 9]))
